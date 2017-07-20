@@ -9,7 +9,7 @@ var score = 0;
 
 
 
-var checkForMatch = function(){
+const checkForMatch = function(){
 
   var scoreNode = document.getElementById('score');
 
@@ -24,24 +24,30 @@ var checkForMatch = function(){
   }
 }
 
-var reset = function(){
+const resetCardDeck = function(){
 
   cardsInPlay = [];
-  score = 0;
-  document.getElementById('score').textContent = "Score: "+score;
+  let gameBoard = document.getElementById('game-board');
 
-  var gameBoard = document.getElementById('game-board');
-
-  for(var i = 0; i < gameBoard.children.length; i++){
+  for(let i = 0; i < gameBoard.children.length; i++){
     gameBoard.children[i].setAttribute('src', 'images/back.png');
   }
 
 }
 
+const reset = function(){
+  cardsInPlay = [];
+  resetCardDeck();
+}
 
-var flipCard = function(){
+const flipCard = function(){
 
-  var cardId = this.getAttribute('data-name');
+  // user must reset cards once two cards have been played
+  if(cardsInPlay.length >= 2){
+    return;
+  }
+
+  let cardId = this.getAttribute('data-name');
 
   cardsInPlay.push(cards[cardId].rank);
 
@@ -53,11 +59,13 @@ var flipCard = function(){
 
 }
 
-var createBoard = function(){
+const createBoard = function(){
 
-  for(var i = 0; i < cards.length; i++){
+  let index = Math.floor(Math.random() * 3)
 
-    var cardElement = document.createElement('img');
+  for(let i = 0; i < cards.length; i++){
+
+    let cardElement = document.createElement('img');
     cardElement.setAttribute('src', 'images/back.png');
 
 
