@@ -105,6 +105,12 @@ footer{
 	font-weight: 700;
 }
 
+#resetButton{
+	background-color: purple;
+	font-weight: bold;
+	font-size: 50px;
+}
+
 #developer-info{
 	color: #F15B31;
 }
